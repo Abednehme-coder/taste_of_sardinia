@@ -336,6 +336,30 @@
       color: var(--light-graphite);
     }
 
+    /* ── TASTING TABLE ── */
+    .tasting-table-wrap {
+      padding: 0 80px 72px;
+    }
+    @media (max-width: 860px) {
+      .tasting-table-wrap { padding: 0 0 48px; }
+    }
+
+    /* ── WHO RUNS IT LAYOUT ── */
+    .who-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+      max-width: 1200px;
+    }
+    @media (max-width: 860px) {
+      .who-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .who-grid .room-img { order: -1; }
+    }
+
     /* ── IMAGE FADES ── */
     .img-fade-all {
       -webkit-mask-image: radial-gradient(ellipse at center, black 45%, transparent 80%);
@@ -358,14 +382,40 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
-      nav, .draft-notice, .section, .section-wide, .notify-section, footer {
-        padding-left: 28px;
-        padding-right: 28px;
+      nav { padding: 20px 24px; }
+      .draft-notice { margin: 0 24px; font-size: 13px; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 48px 24px 40px;
+        gap: 32px;
+        max-width: 100%;
       }
-      .divider { margin: 0 28px; }
-      .hero { grid-template-columns: 1fr; padding: 56px 28px 48px; gap: 40px; }
-      .hero-illustration { max-width: 340px; }
+      .hero h1 { font-size: clamp(38px, 10vw, 56px); }
+      .hero-sub { font-size: 18px; }
+      .hero-illustration { order: -1; max-width: 100%; }
+
+      .section { padding: 48px 24px; }
+      .section-wide { padding: 48px 24px; }
+      .notify-section { padding: 48px 24px 72px; }
+      footer { padding: 28px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
+
       .section-num { font-size: 80px; }
+      h2 { font-size: clamp(24px, 7vw, 32px); }
+
+      .tasting-list li { flex-direction: column; gap: 10px; }
+      .tasting-sketch { flex: none; }
+
+      .details-table td:first-child { width: 110px; font-size: 14px; }
+      .details-table td { font-size: 15px; }
+
+      .price-display { font-size: 52px; }
+
+      .cta-group { flex-direction: column; gap: 16px; }
+      .cta-secondary { margin-left: 0; }
+
+      /* tasting table image full bleed on mobile */
+      div[style*="padding: 0 80px"] { padding-left: 0 !important; padding-right: 0 !important; }
     }
   </style>
 </head>
@@ -576,7 +626,7 @@
   </section>
 
   <!-- tasting table image -->
-  <div style="padding: 0 80px 72px; position:relative; z-index:1;">
+  <div class="tasting-table-wrap" style="position:relative; z-index:1;">
     <img src="images/tasting-table.jpeg" alt="Top-down sketch of tasting table with olive oil bowls, bread, and cheese" class="img-fade-edges" style="width:100%; display:block;">
   </div>
 
@@ -596,7 +646,7 @@
 
   <!-- WHO RUNS IT -->
   <section class="section-wide" id="who-runs-it">
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start; max-width:1200px;">
+    <div class="who-grid">
       <div>
         <span class="section-num">3</span>
         <h2>Who runs it.</h2>
@@ -612,7 +662,7 @@
           Dietary alternatives: <span class="unconfirmed">[not yet confirmed — refer questions to Elena Rossi]</span>
         </p>
       </div>
-      <div style="min-width:0;">
+      <div class="room-img" style="min-width:0;">
         <img src="images/tasting-room.jpeg" alt="Sketch of the Olive and Coast tasting room interior" class="img-fade-edges" style="width:100%; margin-top:16px; display:block;">
       </div>
     </div>
