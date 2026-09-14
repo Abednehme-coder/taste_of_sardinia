@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Taste of Sardinia — Olive &amp; Coast</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:   #FAF7F0;
+      --white:   #FFFFFF;
+      --green:   #2A4A1E;
+      --green-light: #3D6B2C;
+      --gold:    #C8963E;
+      --text:    #1A1A1A;
+      --muted:   #5C5C5C;
+      --border:  #DDD6C8;
+      --font-serif: 'Georgia', 'Times New Roman', serif;
+      --font-sans:  'Helvetica Neue', 'Arial', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--green);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 48px;
+    }
+    nav .logo {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      color: var(--cream);
+      letter-spacing: 0.04em;
+    }
+    nav a.nav-cta {
+      background: var(--gold);
+      color: var(--white);
+      text-decoration: none;
+      padding: 10px 24px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--green);
+      color: var(--white);
+      min-height: 560px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 80px 48px;
+      max-width: 100%;
+    }
+    .hero .eyebrow {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 5vw, 60px);
+      line-height: 1.15;
+      max-width: 700px;
+      margin-bottom: 20px;
+      color: var(--white);
+    }
+    .hero .meta {
+      font-size: 17px;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 36px;
+      line-height: 1.8;
+    }
+    .hero .meta strong { color: var(--white); }
+    .hero .cta-group { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--white);
+      padding: 14px 32px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      display: inline-block;
+    }
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.4);
+      color: var(--white);
+      padding: 14px 32px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 15px;
+      display: inline-block;
+    }
+
+    /* ── DRAFT NOTICE ── */
+    .draft-notice {
+      background: #FFF3CD;
+      border-left: 4px solid var(--gold);
+      padding: 12px 48px;
+      font-size: 13px;
+      color: #7A5F00;
+      font-weight: 500;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 72px 48px; }
+    section + section { border-top: 1px solid var(--border); }
+
+    .section-label {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(26px, 3.5vw, 38px);
+      line-height: 1.2;
+      color: var(--green);
+      margin-bottom: 20px;
+    }
+    p { color: var(--muted); max-width: 640px; margin-bottom: 16px; }
+
+    /* ── WHAT YOU GET ── */
+    .what-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      margin-top: 40px;
+    }
+    .what-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 28px 24px;
+    }
+    .what-card .icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+    .what-card h3 {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      color: var(--green);
+      margin-bottom: 8px;
+    }
+    .what-card p { font-size: 14px; margin: 0; }
+
+    /* ── IMAGE PLACEHOLDER ── */
+    .img-placeholder {
+      background: var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 16px;
+    }
+
+    /* ── DETAILS ── */
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .detail-item { }
+    .detail-item .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .detail-item .value {
+      font-size: 16px;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .detail-item .sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; gap: 40px; } }
+
+    /* ── WHO RUNS IT ── */
+    .about-img {
+      height: 280px;
+    }
+
+    /* ── UNCONFIRMED ── */
+    .unconfirmed {
+      display: inline-block;
+      background: #FFF3CD;
+      border: 1px dashed #C8963E;
+      color: #7A5F00;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    /* ── FAQ ── */
+    .faq-list { margin-top: 32px; max-width: 680px; }
+    .faq-item { border-bottom: 1px solid var(--border); padding: 20px 0; }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-item h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .faq-item p { font-size: 15px; margin: 0; }
+
+    /* ── BOOKING ── */
+    .booking-box {
+      background: var(--green);
+      color: var(--white);
+      border-radius: 12px;
+      padding: 56px 48px;
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .booking-box h2 { color: var(--white); margin-bottom: 12px; }
+    .booking-box p { color: rgba(255,255,255,0.75); max-width: 480px; margin: 0 auto 32px; }
+    .booking-box .price-tag {
+      font-family: var(--font-serif);
+      font-size: 48px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .booking-box .price-note { font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 32px; }
+    .booking-box a.btn-primary { font-size: 16px; padding: 16px 40px; }
+    .booking-box .booking-note {
+      margin-top: 16px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.5);
+      padding: 32px 48px;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer .footer-logo {
+      font-family: var(--font-serif);
+      color: var(--white);
+      font-size: 15px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      .hero { padding: 56px 20px; }
+      section { padding: 48px 20px; }
+      .draft-notice { padding: 12px 20px; }
+      footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+      .booking-box { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="logo">Olive &amp; Coast</span>
+    <a class="nav-cta" href="mailto:bookings@oliveandcoast.example?subject=A%20Taste%20of%20Sardinia%20%E2%80%94%20Notify%20me">
+      Get notified
+    </a>
+  </nav>
+
+  <!-- DRAFT NOTICE -->
+  <div class="draft-notice">
+    DRAFT — awaiting Elena Rossi's approval. Not for publication or distribution.
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="eyebrow">Cagliari · Saturday 24 October 2026</p>
+    <h1>A Taste of Sardinia</h1>
+    <p class="meta">
+      Olive oil, bread, and cheese —<br>
+      <strong>explained by the people who make them.</strong><br>
+      10:00 to 11:30 &nbsp;·&nbsp; Olive &amp; Coast tasting room, Cagliari &nbsp;·&nbsp; EUR 25 per person
+    </p>
+    <div class="cta-group">
+      <a class="btn-primary" href="mailto:bookings@oliveandcoast.example?subject=A%20Taste%20of%20Sardinia%20%E2%80%94%20Notify%20me">
+        Email us to be notified
+      </a>
+      <a class="btn-secondary" href="#what-you-get">See what's included</a>
+    </div>
+  </div>
+
+  <!-- WHAT YOU GET -->
+  <section id="what-you-get" style="background: var(--white);">
+    <p class="section-label">What's included</p>
+    <h2>90 minutes, three Sardinian staples</h2>
+    <p>
+      A guided tasting of three products central to Sardinian food culture —
+      led by a producer who will introduce their work.
+      Up to 20 guests. English throughout.
+    </p>
+
+    <div class="what-grid">
+      <div class="what-card">
+        <div class="icon">🫒</div>
+        <h3>Extra virgin olive oil</h3>
+        <p>Guided tasting with notes on production and region.</p>
+      </div>
+      <div class="what-card">
+        <div class="icon">🍞</div>
+        <h3>Bread</h3>
+        <p>Traditional Sardinian bread, tasted alongside the oil.
+           <br><span class="unconfirmed">Note: contains gluten</span></p>
+      </div>
+      <div class="what-card">
+        <div class="icon">🧀</div>
+        <h3>Cheese</h3>
+        <p>Local cheese selected to pair with the oil.
+           <br><span class="unconfirmed">Note: contains milk</span></p>
+      </div>
+      <div class="what-card">
+        <div class="icon">🧑‍🌾</div>
+        <h3>Producer introduction</h3>
+        <p>Meet the producer and hear about the work directly from them.</p>
+      </div>
+    </div>
+
+    <!-- image placeholder -->
+    <div class="img-placeholder" style="margin-top:40px; height:260px;">
+      [IMAGE PLACEHOLDER: photo of olive oil, bread, and cheese arranged on a wooden table in the tasting room]
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section id="details">
+    <p class="section-label">Event details</p>
+    <h2>What to know before you come</h2>
+
+    <div class="details-grid">
+      <div class="detail-item">
+        <div class="label">Date</div>
+        <div class="value">Saturday, 24 October 2026</div>
+      </div>
+      <div class="detail-item">
+        <div class="label">Time</div>
+        <div class="value">10:00 to 11:30</div>
+        <div class="sub">90 minutes · local Cagliari time</div>
+      </div>
+      <div class="detail-item">
+        <div class="label">Venue</div>
+        <div class="value">Olive &amp; Coast tasting room</div>
+        <div class="sub">Cagliari, Sardinia</div>
+      </div>
+      <div class="detail-item">
+        <div class="label">Price</div>
+        <div class="value">EUR 25 per person</div>
+      </div>
+      <div class="detail-item">
+        <div class="label">Capacity</div>
+        <div class="value">20 guests maximum</div>
+      </div>
+      <div class="detail-item">
+        <div class="label">Language</div>
+        <div class="value">English</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO RUNS IT -->
+  <section id="who-runs-it" style="background: var(--white);">
+    <div class="two-col">
+      <div>
+        <p class="section-label">Who runs it</p>
+        <h2>Olive &amp; Coast, Cagliari</h2>
+        <p>
+          Olive &amp; Coast works with local food producers in Sardinia to bring their
+          products to visitors. This session is led in partnership with a local producer
+          who will be present throughout the tasting.
+        </p>
+        <p>
+          Producer: <span class="unconfirmed">[UNCONFIRMED: producer name not yet confirmed — Elena to advise]</span>
+        </p>
+        <p>
+          Dietary alternatives: <span class="unconfirmed">[UNCONFIRMED: whether alternatives will be offered — refer to Elena]</span>
+        </p>
+      </div>
+      <div class="img-placeholder about-img">
+        [IMAGE PLACEHOLDER: photo of the Olive &amp; Coast tasting room interior or exterior]
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <p class="section-label">Questions</p>
+    <h2>Frequently asked</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <h4>When do bookings open?</h4>
+        <p><span class="unconfirmed">[UNCONFIRMED: booking open date — Elena to confirm]</span>
+           To be told as soon as bookings are open, email us at
+           <a href="mailto:bookings@oliveandcoast.example">bookings@oliveandcoast.example</a>.</p>
+      </div>
+      <div class="faq-item">
+        <h4>How do I book?</h4>
+        <p>Bookings are not open yet. Once they are open, you can book by email to
+           <a href="mailto:bookings@oliveandcoast.example">bookings@oliveandcoast.example</a>.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What are the dietary options?</h4>
+        <p>The tasting includes bread (contains gluten) and cheese (contains milk).
+           <span class="unconfirmed">[UNCONFIRMED: whether alternative options will be available — Elena to confirm before launch]</span></p>
+      </div>
+      <div class="faq-item">
+        <h4>What is the cancellation policy?</h4>
+        <p><span class="unconfirmed">[UNCONFIRMED: refund and cancellation terms — Elena to confirm before launch]</span></p>
+      </div>
+      <div class="faq-item">
+        <h4>Is it in English?</h4>
+        <p>Yes. The session is conducted entirely in English.</p>
+      </div>
+      <div class="faq-item">
+        <h4>How many guests are there?</h4>
+        <p>Maximum 20 guests per session.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING / GET NOTIFIED -->
+  <section id="notify" style="background: var(--cream);">
+    <div class="booking-box">
+      <p class="section-label" style="color: var(--gold);">Bookings opening soon</p>
+      <div class="price-tag">EUR 25</div>
+      <p class="price-note">per person · 90 minutes · maximum 20 guests</p>
+      <h2>Be the first to know</h2>
+      <p>Bookings are not yet open. Email us and we will notify you as soon as they are.</p>
+      <a class="btn-primary"
+         href="mailto:bookings@oliveandcoast.example?subject=A%20Taste%20of%20Sardinia%20%E2%80%94%20Notify%20me%20when%20bookings%20open">
+        Email us to be notified
+      </a>
+      <p class="booking-note">bookings@oliveandcoast.example</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">Olive &amp; Coast</span>
+    <span>Cagliari, Sardinia · bookings@oliveandcoast.example</span>
+    <span>DRAFT — not for publication</span>
+  </footer>
+
+</body>
+</html>
