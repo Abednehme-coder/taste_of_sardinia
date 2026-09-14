@@ -30,16 +30,23 @@
       position: relative;
     }
 
-    /* Subtle grain overlay on body */
+    /* Pattern background */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: 1000;
-      opacity: 0.04;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      z-index: 0;
+      opacity: 0.055;
+      background-image: url('images/bg-pattern.jpeg');
       background-repeat: repeat;
+      background-size: 700px auto;
+    }
+
+    /* Ensure content sits above pattern */
+    nav, .draft-notice, .hero, .divider, .section, .section-wide, .notify-section, footer {
+      position: relative;
+      z-index: 1;
     }
 
     /* ── NAV ── */
@@ -371,9 +378,14 @@
       <a class="cta-secondary" href="#what-you-get">See what's included ↓</a>
     </div>
 
-    <!-- Hand-drawn hero illustration: olive branch + tasting items -->
+    <!-- Hero illustration -->
     <div class="hero-illustration">
-      <svg viewBox="0 0 400 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <img src="images/hero-illustration.jpeg" alt="Hand-drawn sketch of olive branch, oil bottle, cheese, and bread" style="width:100%; border-radius:3px;">
+    </div>
+  </div>
+
+  <!-- HIDDEN: old SVG hero kept for reference -->
+  <div style="display:none"><svg viewBox="0 0 400 440" fill="none" xmlns="http://www.w3.org/2000/svg">
         <!-- Paper bg hint -->
         <rect width="400" height="440" fill="#EDE5D0" rx="3"/>
 
@@ -460,24 +472,11 @@
           <ellipse cx="148" cy="126" rx="4" ry="5.5" transform="rotate(20 148 126)"/>
         </g>
 
-        <!-- Wobbly border around illustration -->
-        <path d="M8 8 C8 8 392 6 393 8 C394 10 395 432 393 433 C391 434 8 434 7 432 C6 430 6 10 8 8 Z"
-              stroke="#1A1A1A" stroke-width="1.5" fill="none" opacity="0.35"/>
+      </svg></div>
 
-        <!-- Handwritten caption -->
-        <text x="12" y="428" font-family="Georgia, serif" font-size="10" fill="#6B6B6B" opacity="0.7">
-          Olive &amp; Coast · Cagliari
-        </text>
-      </svg>
-    </div>
-  </div>
-
-  <!-- HAND-DRAWN DIVIDER -->
-  <div class="divider" style="margin: 0 80px;">
-    <svg height="12" viewBox="0 0 900 12" preserveAspectRatio="none">
-      <path d="M0 6 C80 3 160 9 240 6 C320 3 400 8 480 6 C560 4 640 8 720 5 C800 3 860 7 900 6"
-            stroke="#1A1A1A" stroke-width="1.2" fill="none" opacity="0.4"/>
-    </svg>
+  <!-- DIVIDER -->
+  <div style="text-align:center; padding: 8px 0; position:relative; z-index:1;">
+    <img src="images/divider-sprig.jpeg" alt="" style="width:260px; opacity:0.7;">
   </div>
 
   <!-- WHAT YOU GET -->
@@ -556,12 +555,9 @@
     </ul>
   </section>
 
-  <!-- DIVIDER -->
-  <div class="divider" style="margin: 0 80px;">
-    <svg height="12" viewBox="0 0 900 12" preserveAspectRatio="none">
-      <path d="M0 7 C100 4 200 9 300 7 C400 5 500 8 600 6 C700 4 800 8 900 7"
-            stroke="#8A8A8A" stroke-width="1" fill="none" opacity="0.5"/>
-    </svg>
+  <!-- tasting table image -->
+  <div style="padding: 0 80px 56px; position:relative; z-index:1;">
+    <img src="images/tasting-table.jpeg" alt="Top-down sketch of tasting table with olive oil bowls, bread, and cheese" style="width:100%; max-width:760px; border-radius:3px; display:block;">
   </div>
 
   <!-- DETAILS -->
@@ -578,38 +574,29 @@
     </table>
   </section>
 
-  <!-- DIVIDER -->
-  <div class="divider" style="margin: 0 80px;">
-    <svg height="12" viewBox="0 0 900 12" preserveAspectRatio="none">
-      <path d="M0 6 C150 3 300 9 450 6 C600 3 750 8 900 6"
-            stroke="#8A8A8A" stroke-width="1" fill="none" opacity="0.5"/>
-    </svg>
-  </div>
-
   <!-- WHO RUNS IT -->
-  <section class="section" id="who-runs-it">
-    <span class="section-num">3</span>
-    <h2>Who runs it.</h2>
-    <p>
-      Olive &amp; Coast works with local food producers in Sardinia to bring
-      their products to visitors. This session is run in partnership with a
-      local producer who will be present for the full 90 minutes.
-    </p>
-    <p class="aside">
-      Producer: <span class="unconfirmed">[not yet confirmed — Elena to advise before launch]</span>
-    </p>
-    <p class="aside" style="margin-top: 12px;">
-      Dietary alternatives: <span class="unconfirmed">[not yet confirmed — refer questions to Elena Rossi]</span>
-    </p>
+  <section class="section-wide" id="who-runs-it">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start; max-width:1200px;">
+      <div>
+        <span class="section-num">3</span>
+        <h2>Who runs it.</h2>
+        <p>
+          Olive &amp; Coast works with local food producers in Sardinia to bring
+          their products to visitors. This session is run in partnership with a
+          local producer who will be present for the full 90 minutes.
+        </p>
+        <p class="aside">
+          Producer: <span class="unconfirmed">[not yet confirmed — Elena to advise before launch]</span>
+        </p>
+        <p class="aside" style="margin-top: 12px;">
+          Dietary alternatives: <span class="unconfirmed">[not yet confirmed — refer questions to Elena Rossi]</span>
+        </p>
+      </div>
+      <div>
+        <img src="images/tasting-room.jpeg" alt="Sketch of the Olive and Coast tasting room interior" style="width:100%; border-radius:3px; margin-top:32px;">
+      </div>
+    </div>
   </section>
-
-  <!-- DIVIDER -->
-  <div class="divider" style="margin: 0 80px;">
-    <svg height="12" viewBox="0 0 900 12" preserveAspectRatio="none">
-      <path d="M0 5 C120 8 240 3 360 6 C480 9 600 4 720 6 C840 8 880 5 900 6"
-            stroke="#8A8A8A" stroke-width="1" fill="none" opacity="0.5"/>
-    </svg>
-  </div>
 
   <!-- FAQ -->
   <section class="section" id="faq">
@@ -641,14 +628,6 @@
       </div>
     </div>
   </section>
-
-  <!-- DIVIDER -->
-  <div class="divider" style="margin: 0 80px;">
-    <svg height="12" viewBox="0 0 900 12" preserveAspectRatio="none">
-      <path d="M0 7 C200 4 400 9 600 6 C750 4 850 8 900 7"
-            stroke="#1A1A1A" stroke-width="1.2" fill="none" opacity="0.35"/>
-    </svg>
-  </div>
 
   <!-- GET NOTIFIED -->
   <section class="notify-section" id="notify">
