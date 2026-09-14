@@ -4,301 +4,341 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A Taste of Sardinia — Olive &amp; Coast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream:   #FAF7F0;
-      --white:   #FFFFFF;
-      --green:   #2A4A1E;
-      --green-light: #3D6B2C;
-      --gold:    #C8963E;
-      --text:    #1A1A1A;
-      --muted:   #5C5C5C;
-      --border:  #DDD6C8;
-      --font-serif: 'Georgia', 'Times New Roman', serif;
-      --font-sans:  'Helvetica Neue', 'Arial', sans-serif;
+      --paper:    #F3EEDE;
+      --paper-2:  #F0E9D8;
+      --ink:      #1A1A1A;
+      --graphite: #6B6B6B;
+      --light-graphite: #8A8A8A;
     }
 
     html { scroll-behavior: smooth; }
 
+    /* Paper grain texture via SVG filter */
     body {
-      background: var(--cream);
-      color: var(--text);
-      font-family: var(--font-sans);
-      font-size: 16px;
-      line-height: 1.6;
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 17px;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    /* Subtle grain overlay on body */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-repeat: repeat;
     }
 
     /* ── NAV ── */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--green);
+      padding: 28px 80px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      padding: 16px 48px;
+      align-items: baseline;
+      border-bottom: none;
     }
-    nav .logo {
-      font-family: var(--font-serif);
-      font-size: 18px;
-      color: var(--cream);
-      letter-spacing: 0.04em;
-    }
-    nav a.nav-cta {
-      background: var(--gold);
-      color: var(--white);
-      text-decoration: none;
-      padding: 10px 24px;
-      border-radius: 4px;
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-    }
-
-    /* ── HERO ── */
-    .hero {
-      background: var(--green);
-      color: var(--white);
-      min-height: 560px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 80px 48px;
-      max-width: 100%;
-    }
-    .hero .eyebrow {
-      font-size: 13px;
-      letter-spacing: 0.12em;
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 16px;
-      font-weight: 600;
+      color: var(--ink);
     }
-    .hero h1 {
-      font-family: var(--font-serif);
-      font-size: clamp(36px, 5vw, 60px);
-      line-height: 1.15;
-      max-width: 700px;
-      margin-bottom: 20px;
-      color: var(--white);
-    }
-    .hero .meta {
-      font-size: 17px;
-      color: rgba(255,255,255,0.8);
-      margin-bottom: 36px;
-      line-height: 1.8;
-    }
-    .hero .meta strong { color: var(--white); }
-    .hero .cta-group { display: flex; gap: 16px; flex-wrap: wrap; }
-    .btn-primary {
-      background: var(--gold);
-      color: var(--white);
-      padding: 14px 32px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 600;
+    .nav-note {
+      font-family: 'Caveat', cursive;
       font-size: 15px;
-      display: inline-block;
-    }
-    .btn-secondary {
-      border: 1px solid rgba(255,255,255,0.4);
-      color: var(--white);
-      padding: 14px 32px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-size: 15px;
-      display: inline-block;
+      color: var(--graphite);
     }
 
     /* ── DRAFT NOTICE ── */
     .draft-notice {
-      background: #FFF3CD;
-      border-left: 4px solid var(--gold);
-      padding: 12px 48px;
-      font-size: 13px;
-      color: #7A5F00;
-      font-weight: 500;
+      margin: 0 80px 0;
+      padding: 8px 0;
+      font-family: 'Caveat', cursive;
+      font-size: 14px;
+      color: var(--graphite);
+      border-top: 1px solid var(--graphite);
+      border-bottom: 1px solid var(--graphite);
+      /* hand-drawn feel via border style */
     }
 
-    /* ── SECTIONS ── */
-    section { padding: 72px 48px; }
-    section + section { border-top: 1px solid var(--border); }
-
-    .section-label {
-      font-size: 12px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-    h2 {
-      font-family: var(--font-serif);
-      font-size: clamp(26px, 3.5vw, 38px);
-      line-height: 1.2;
-      color: var(--green);
-      margin-bottom: 20px;
-    }
-    p { color: var(--muted); max-width: 640px; margin-bottom: 16px; }
-
-    /* ── WHAT YOU GET ── */
-    .what-grid {
+    /* ── HERO ── */
+    .hero {
+      padding: 80px 80px 64px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 32px;
-      margin-top: 40px;
-    }
-    .what-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 28px 24px;
-    }
-    .what-card .icon {
-      font-size: 32px;
-      margin-bottom: 12px;
-    }
-    .what-card h3 {
-      font-family: var(--font-serif);
-      font-size: 18px;
-      color: var(--green);
-      margin-bottom: 8px;
-    }
-    .what-card p { font-size: 14px; margin: 0; }
-
-    /* ── IMAGE PLACEHOLDER ── */
-    .img-placeholder {
-      background: var(--border);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      font-size: 13px;
-      text-align: center;
-      padding: 16px;
-    }
-
-    /* ── DETAILS ── */
-    .details-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 24px;
-      margin-top: 40px;
-    }
-    .detail-item { }
-    .detail-item .label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--gold);
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .detail-item .value {
-      font-size: 16px;
-      color: var(--text);
-      font-weight: 500;
-    }
-    .detail-item .sub {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 420px;
       gap: 64px;
       align-items: start;
-    }
-    @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; gap: 40px; } }
-
-    /* ── WHO RUNS IT ── */
-    .about-img {
-      height: 280px;
+      max-width: 1200px;
     }
 
-    /* ── UNCONFIRMED ── */
-    .unconfirmed {
+    .hero-text {}
+    .hero-eyebrow {
+      font-family: 'Caveat', cursive;
+      font-size: 16px;
+      color: var(--graphite);
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(42px, 5.5vw, 72px);
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+    .hero-sub {
+      font-family: 'Caveat', cursive;
+      font-size: 20px;
+      color: var(--graphite);
+      margin-bottom: 40px;
+      line-height: 1.5;
+    }
+
+    /* Ink-drawn CTA — no gradient, no color block */
+    .cta-ink {
       display: inline-block;
-      background: #FFF3CD;
-      border: 1px dashed #C8963E;
-      color: #7A5F00;
-      padding: 2px 8px;
-      border-radius: 3px;
-      font-size: 13px;
-      font-style: italic;
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 2px solid var(--ink);
+      position: relative;
+      letter-spacing: 0.04em;
+    }
+    /* Slight hand-drawn offset shadow */
+    .cta-ink::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      right: -4px;
+      bottom: -4px;
+      border: 2px solid var(--graphite);
+      z-index: -1;
+    }
+    .cta-secondary {
+      font-family: 'Caveat', cursive;
+      font-size: 17px;
+      color: var(--graphite);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      margin-left: 28px;
+    }
+
+    /* Hero illustration — SVG hand-drawn */
+    .hero-illustration {
+      margin-top: 8px;
+    }
+    .hero-illustration svg {
+      width: 100%;
+      height: auto;
+    }
+
+    /* ── HAND-DRAWN DIVIDER ── */
+    .divider {
+      margin: 0 80px;
+      overflow: visible;
+    }
+    .divider svg { width: 100%; }
+
+    /* ── SECTIONS ── */
+    .section {
+      padding: 72px 80px;
+      max-width: 900px;
+    }
+    .section-wide {
+      padding: 72px 80px;
+    }
+
+    /* Oversized section numeral */
+    .section-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 120px;
+      font-weight: 900;
+      line-height: 0.85;
+      color: var(--paper-2);
+      /* Slightly darker than paper to show through */
+      -webkit-text-stroke: 2px var(--graphite);
+      text-stroke: 2px var(--graphite);
+      display: block;
+      margin-bottom: -16px;
+      margin-left: -6px;
+      user-select: none;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+    p {
+      color: var(--ink);
+      margin-bottom: 16px;
+      max-width: 620px;
+    }
+    p.muted { color: var(--graphite); }
+
+    /* Handwritten aside / annotation */
+    .aside {
+      font-family: 'Caveat', cursive;
+      font-size: 17px;
+      color: var(--graphite);
+      margin: 12px 0;
+      padding-left: 20px;
+      border-left: 2px solid var(--light-graphite);
+    }
+
+    /* ── WHAT YOU GET — list style, no cards ── */
+    .tasting-list {
+      margin-top: 32px;
+      list-style: none;
+    }
+    .tasting-list li {
+      display: flex;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--light-graphite);
+      align-items: flex-start;
+    }
+    .tasting-list li:first-child { border-top: 1px solid var(--light-graphite); }
+    .tasting-sketch {
+      flex: 0 0 72px;
+      text-align: center;
+      margin-top: 4px;
+    }
+    .tasting-sketch svg { width: 60px; height: 60px; }
+    .tasting-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .tasting-info p { font-size: 15px; margin: 0; color: var(--graphite); }
+
+    /* ── DETAILS — no grid cards ── */
+    .details-table {
+      margin-top: 32px;
+      width: 100%;
+      max-width: 560px;
+      border-collapse: collapse;
+    }
+    .details-table tr { border-bottom: 1px solid #D6CCB8; }
+    .details-table tr:last-child { border-bottom: none; }
+    .details-table td {
+      padding: 14px 0;
+      font-size: 16px;
+      vertical-align: top;
+    }
+    .details-table td:first-child {
+      font-family: 'Caveat', cursive;
+      font-size: 15px;
+      color: var(--graphite);
+      width: 160px;
+      padding-top: 16px;
+    }
+    .details-table td:last-child {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    /* ── UNCONFIRMED placeholder ── */
+    .unconfirmed {
+      font-family: 'Caveat', cursive;
+      font-size: 15px;
+      color: var(--graphite);
+      border-bottom: 1px dashed var(--graphite);
+      padding-bottom: 1px;
     }
 
     /* ── FAQ ── */
-    .faq-list { margin-top: 32px; max-width: 680px; }
-    .faq-item { border-bottom: 1px solid var(--border); padding: 20px 0; }
-    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-list { margin-top: 32px; max-width: 640px; }
+    .faq-item { margin-bottom: 32px; }
     .faq-item h4 {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 8px;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 6px;
     }
-    .faq-item p { font-size: 15px; margin: 0; }
+    .faq-item p {
+      font-size: 15px;
+      color: var(--graphite);
+      margin: 0;
+    }
+    .faq-item a { color: var(--ink); }
 
-    /* ── BOOKING ── */
-    .booking-box {
-      background: var(--green);
-      color: var(--white);
-      border-radius: 12px;
-      padding: 56px 48px;
-      max-width: 680px;
-      margin: 0 auto;
-      text-align: center;
+    /* ── GET NOTIFIED — no colored box ── */
+    .notify-section {
+      padding: 72px 80px 96px;
+      max-width: 700px;
     }
-    .booking-box h2 { color: var(--white); margin-bottom: 12px; }
-    .booking-box p { color: rgba(255,255,255,0.75); max-width: 480px; margin: 0 auto 32px; }
-    .booking-box .price-tag {
-      font-family: var(--font-serif);
-      font-size: 48px;
-      color: var(--gold);
-      margin-bottom: 8px;
+    .price-display {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--ink);
+      margin-bottom: 4px;
     }
-    .booking-box .price-note { font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 32px; }
-    .booking-box a.btn-primary { font-size: 16px; padding: 16px 40px; }
-    .booking-box .booking-note {
-      margin-top: 16px;
-      font-size: 13px;
-      color: rgba(255,255,255,0.5);
+    .price-note {
+      font-family: 'Caveat', cursive;
+      font-size: 16px;
+      color: var(--graphite);
+      margin-bottom: 32px;
     }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--text);
-      color: rgba(255,255,255,0.5);
-      padding: 32px 48px;
-      font-size: 13px;
+      padding: 32px 80px 48px;
+      border-top: 1px solid #D6CCB8;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
+      align-items: flex-end;
     }
-    footer .footer-logo {
-      font-family: var(--font-serif);
-      color: var(--white);
-      font-size: 15px;
+    .footer-cite {
+      font-family: 'Caveat', cursive;
+      font-size: 13px;
+      color: var(--graphite);
+      line-height: 1.8;
+    }
+    .footer-draft {
+      font-family: 'Caveat', cursive;
+      font-size: 13px;
+      color: var(--light-graphite);
     }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 600px) {
-      nav { padding: 14px 20px; }
-      .hero { padding: 56px 20px; }
-      section { padding: 48px 20px; }
-      .draft-notice { padding: 12px 20px; }
-      footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
-      .booking-box { padding: 40px 24px; }
+    @media (max-width: 860px) {
+      nav, .draft-notice, .section, .section-wide, .notify-section, footer {
+        padding-left: 28px;
+        padding-right: 28px;
+      }
+      .divider { margin: 0 28px; }
+      .hero { grid-template-columns: 1fr; padding: 56px 28px 48px; gap: 40px; }
+      .hero-illustration { max-width: 340px; }
+      .section-num { font-size: 80px; }
     }
   </style>
 </head>
@@ -307,191 +347,335 @@
   <!-- NAV -->
   <nav>
     <span class="logo">Olive &amp; Coast</span>
-    <a class="nav-cta" href="mailto:bookings@oliveandcoast.example?subject=A%20Taste%20of%20Sardinia%20%E2%80%94%20Notify%20me">
-      Get notified
-    </a>
+    <span class="nav-note">Cagliari, Sardinia</span>
   </nav>
 
   <!-- DRAFT NOTICE -->
-  <div class="draft-notice">
-    DRAFT — awaiting Elena Rossi's approval. Not for publication or distribution.
+  <div class="draft-notice" style="margin: 0 80px;">
+    Draft — awaiting Elena Rossi's approval. Not for publication or distribution.
   </div>
 
   <!-- HERO -->
   <div class="hero">
-    <p class="eyebrow">Cagliari · Saturday 24 October 2026</p>
-    <h1>A Taste of Sardinia</h1>
-    <p class="meta">
-      Olive oil, bread, and cheese —<br>
-      <strong>explained by the people who make them.</strong><br>
-      10:00 to 11:30 &nbsp;·&nbsp; Olive &amp; Coast tasting room, Cagliari &nbsp;·&nbsp; EUR 25 per person
-    </p>
-    <div class="cta-group">
-      <a class="btn-primary" href="mailto:bookings@oliveandcoast.example?subject=A%20Taste%20of%20Sardinia%20%E2%80%94%20Notify%20me">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Saturday, 24 October 2026 &nbsp;·&nbsp; 10:00 to 11:30</p>
+      <h1>A Taste of<br>Sardinia.</h1>
+      <p class="hero-sub">
+        Olive oil, bread, and cheese —<br>
+        explained by the people who make them.
+      </p>
+      <a class="cta-ink"
+         href="mailto:bookings@oliveandcoast.example?subject=Notify%20me%20when%20bookings%20open%20%E2%80%94%20A%20Taste%20of%20Sardinia">
         Email us to be notified
       </a>
-      <a class="btn-secondary" href="#what-you-get">See what's included</a>
+      <a class="cta-secondary" href="#what-you-get">See what's included ↓</a>
+    </div>
+
+    <!-- Hand-drawn hero illustration: olive branch + tasting items -->
+    <div class="hero-illustration">
+      <svg viewBox="0 0 400 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Paper bg hint -->
+        <rect width="400" height="440" fill="#EDE5D0" rx="3"/>
+
+        <!-- Cross-hatch shading top-right corner -->
+        <g stroke="#8A8A8A" stroke-width="0.6" opacity="0.35">
+          <line x1="280" y1="0" x2="400" y2="120"/><line x1="300" y1="0" x2="400" y2="100"/>
+          <line x1="320" y1="0" x2="400" y2="80"/><line x1="340" y1="0" x2="400" y2="60"/>
+          <line x1="360" y1="0" x2="400" y2="40"/><line x1="380" y1="0" x2="400" y2="20"/>
+        </g>
+
+        <!-- Olive oil bottle — rough ink sketch -->
+        <g stroke="#1A1A1A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Bottle body -->
+          <path d="M160 180 C155 160 150 145 152 125 L168 125 C170 145 165 160 160 180"/>
+          <path d="M145 180 C138 195 136 240 138 265 C140 285 180 285 182 265 C184 240 182 195 175 180"/>
+          <!-- Bottle neck detail -->
+          <line x1="152" y1="135" x2="168" y2="135"/>
+          <line x1="153" y1="128" x2="167" y2="128"/>
+          <!-- Cork/cap -->
+          <rect x="154" y="118" width="12" height="8" rx="1"/>
+          <!-- Label rough rectangle -->
+          <rect x="140" y="205" width="40" height="44" rx="2" stroke-width="1.5"/>
+          <!-- Label lines -->
+          <line x1="145" y1="215" x2="175" y2="215" stroke-width="1"/>
+          <line x1="148" y1="222" x2="172" y2="222" stroke-width="1"/>
+          <line x1="150" y1="229" x2="170" y2="229" stroke-width="0.8"/>
+          <!-- Liquid level cross-hatch -->
+          <g stroke="#6B6B6B" stroke-width="0.7" opacity="0.5">
+            <line x1="140" y1="258" x2="182" y2="258"/>
+            <line x1="141" y1="263" x2="181" y2="263"/>
+          </g>
+        </g>
+
+        <!-- Bread loaf — rough sketch -->
+        <g stroke="#1A1A1A" stroke-width="2" stroke-linecap="round">
+          <path d="M210 310 C208 295 212 278 228 272 C248 266 274 270 280 285 C288 302 282 318 268 322 C252 327 212 325 210 310 Z"/>
+          <!-- Bread score lines -->
+          <path d="M230 274 C228 288 226 305 224 318" stroke-width="1.2"/>
+          <path d="M248 270 C246 285 245 302 244 318" stroke-width="1.2"/>
+          <!-- Texture cross-hatch on bread -->
+          <g stroke="#6B6B6B" stroke-width="0.7" opacity="0.4">
+            <line x1="215" y1="308" x2="225" y2="295"/>
+            <line x1="220" y1="312" x2="233" y2="297"/>
+            <line x1="257" y1="314" x2="268" y2="298"/>
+            <line x1="264" y1="316" x2="276" y2="300"/>
+          </g>
+        </g>
+
+        <!-- Cheese wedge — rough sketch -->
+        <g stroke="#1A1A1A" stroke-width="2" stroke-linecap="round">
+          <path d="M60 335 L60 295 L115 270 L145 295 L145 335 Z"/>
+          <path d="M60 295 L145 295"/>
+          <!-- Holes in cheese -->
+          <ellipse cx="88" cy="310" rx="6" ry="4" stroke-width="1.5"/>
+          <ellipse cx="118" cy="305" rx="5" ry="3.5" stroke-width="1.5"/>
+          <ellipse cx="100" cy="322" rx="4" ry="3" stroke-width="1.2"/>
+          <!-- Cheese shading -->
+          <g stroke="#8A8A8A" stroke-width="0.6" opacity="0.35">
+            <line x1="62" y1="320" x2="144" y2="320"/>
+            <line x1="62" y1="327" x2="144" y2="327"/>
+          </g>
+        </g>
+
+        <!-- Olive branch — flowing, loose -->
+        <g stroke="#1A1A1A" stroke-width="1.8" stroke-linecap="round" fill="none">
+          <!-- Main stem -->
+          <path d="M40 80 C70 110 100 130 140 155 C175 175 200 165 230 150"/>
+          <!-- Branch 1 -->
+          <path d="M75 115 C65 105 55 98 48 102"/>
+          <!-- Branch 2 -->
+          <path d="M95 128 C88 115 82 108 72 108"/>
+          <!-- Branch 3 -->
+          <path d="M120 143 C115 130 108 122 100 118"/>
+          <!-- Branch 4 -->
+          <path d="M155 158 C152 144 148 135 140 130"/>
+          <!-- Leaves — rounded rough shapes -->
+          <ellipse cx="46" cy="100" rx="8" ry="5" transform="rotate(-30 46 100)" stroke-width="1.5"/>
+          <ellipse cx="70" cy="106" rx="9" ry="5" transform="rotate(-45 70 106)" stroke-width="1.5"/>
+          <ellipse cx="97" cy="116" rx="9" ry="5" transform="rotate(-20 97 116)" stroke-width="1.5"/>
+          <ellipse cx="137" cy="128" rx="8" ry="5" transform="rotate(-35 137 128)" stroke-width="1.5"/>
+          <!-- Olives -->
+          <ellipse cx="55" cy="98" rx="5" ry="6" transform="rotate(15 55 98)"/>
+          <ellipse cx="107" cy="113" rx="5" ry="6" transform="rotate(-10 107 113)"/>
+          <ellipse cx="148" cy="126" rx="4" ry="5.5" transform="rotate(20 148 126)"/>
+        </g>
+
+        <!-- Wobbly border around illustration -->
+        <path d="M8 8 C8 8 392 6 393 8 C394 10 395 432 393 433 C391 434 8 434 7 432 C6 430 6 10 8 8 Z"
+              stroke="#1A1A1A" stroke-width="1.5" fill="none" opacity="0.35"/>
+
+        <!-- Handwritten caption -->
+        <text x="12" y="428" font-family="Georgia, serif" font-size="10" fill="#6B6B6B" opacity="0.7">
+          Olive &amp; Coast · Cagliari
+        </text>
+      </svg>
     </div>
   </div>
 
+  <!-- HAND-DRAWN DIVIDER -->
+  <div class="divider" style="margin: 0 80px;">
+    <svg height="12" viewBox="0 0 900 12" preserveAspectRatio="none">
+      <path d="M0 6 C80 3 160 9 240 6 C320 3 400 8 480 6 C560 4 640 8 720 5 C800 3 860 7 900 6"
+            stroke="#1A1A1A" stroke-width="1.2" fill="none" opacity="0.4"/>
+    </svg>
+  </div>
+
   <!-- WHAT YOU GET -->
-  <section id="what-you-get" style="background: var(--white);">
-    <p class="section-label">What's included</p>
-    <h2>90 minutes, three Sardinian staples</h2>
-    <p>
-      A guided tasting of three products central to Sardinian food culture —
-      led by a producer who will introduce their work.
-      Up to 20 guests. English throughout.
+  <section class="section" id="what-you-get">
+    <span class="section-num">1</span>
+    <h2>What you taste.</h2>
+    <p class="muted">
+      A guided 90-minute session. Up to 20 guests. English throughout.
+      A producer will be present to introduce their work.
     </p>
-
-    <div class="what-grid">
-      <div class="what-card">
-        <div class="icon">🫒</div>
-        <h3>Extra virgin olive oil</h3>
-        <p>Guided tasting with notes on production and region.</p>
-      </div>
-      <div class="what-card">
-        <div class="icon">🍞</div>
-        <h3>Bread</h3>
-        <p>Traditional Sardinian bread, tasted alongside the oil.
-           <br><span class="unconfirmed">Note: contains gluten</span></p>
-      </div>
-      <div class="what-card">
-        <div class="icon">🧀</div>
-        <h3>Cheese</h3>
-        <p>Local cheese selected to pair with the oil.
-           <br><span class="unconfirmed">Note: contains milk</span></p>
-      </div>
-      <div class="what-card">
-        <div class="icon">🧑‍🌾</div>
-        <h3>Producer introduction</h3>
-        <p>Meet the producer and hear about the work directly from them.</p>
-      </div>
-    </div>
-
-    <!-- image placeholder -->
-    <div class="img-placeholder" style="margin-top:40px; height:260px;">
-      [IMAGE PLACEHOLDER: photo of olive oil, bread, and cheese arranged on a wooden table in the tasting room]
-    </div>
+    <ul class="tasting-list">
+      <li>
+        <div class="tasting-sketch">
+          <!-- Olive oil drop sketch -->
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 8 C30 8 14 28 14 38 C14 48 21 54 30 54 C39 54 46 48 46 38 C46 28 30 8 30 8Z"
+                  stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+            <path d="M22 42 C23 46 27 48 30 48" stroke="#6B6B6B" stroke-width="1.5" stroke-linecap="round"/>
+            <g stroke="#8A8A8A" stroke-width="0.7" opacity="0.4">
+              <line x1="20" y1="38" x2="28" y2="32"/><line x1="20" y1="43" x2="30" y2="36"/>
+            </g>
+          </svg>
+        </div>
+        <div class="tasting-info">
+          <h3>Extra virgin olive oil</h3>
+          <p>Guided tasting with notes on production and provenance.</p>
+        </div>
+      </li>
+      <li>
+        <div class="tasting-sketch">
+          <!-- Bread sketch -->
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 38 C10 26 18 18 30 18 C42 18 50 26 50 34 C50 42 44 46 30 46 C16 46 10 44 10 38 Z"
+                  stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+            <path d="M22 20 C20 28 20 38 20 44" stroke="#1A1A1A" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M38 20 C37 28 37 38 37 44" stroke="#1A1A1A" stroke-width="1.2" stroke-linecap="round"/>
+            <g stroke="#8A8A8A" stroke-width="0.7" opacity="0.35">
+              <line x1="12" y1="40" x2="48" y2="40"/><line x1="12" y1="43" x2="48" y2="43"/>
+            </g>
+          </svg>
+        </div>
+        <div class="tasting-info">
+          <h3>Bread</h3>
+          <p>Traditional Sardinian bread. <span class="unconfirmed">Contains gluten.</span></p>
+        </div>
+      </li>
+      <li>
+        <div class="tasting-sketch">
+          <!-- Cheese wedge sketch -->
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 46 L8 30 L40 14 L52 30 L52 46 Z" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+            <line x1="8" y1="30" x2="52" y2="30" stroke="#1A1A1A" stroke-width="1.5"/>
+            <ellipse cx="24" cy="38" rx="4" ry="3" stroke="#1A1A1A" stroke-width="1.2"/>
+            <ellipse cx="38" cy="36" rx="3.5" ry="2.5" stroke="#1A1A1A" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="tasting-info">
+          <h3>Cheese</h3>
+          <p>Local cheese paired with the oil. <span class="unconfirmed">Contains milk.</span></p>
+        </div>
+      </li>
+      <li>
+        <div class="tasting-sketch">
+          <!-- Person/producer sketch -->
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="30" cy="18" r="10" stroke="#1A1A1A" stroke-width="2"/>
+            <path d="M14 54 C14 42 20 36 30 36 C40 36 46 42 46 54" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+            <path d="M22 16 C24 14 28 13 30 13" stroke="#6B6B6B" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="tasting-info">
+          <h3>Producer introduction</h3>
+          <p>Meet the producer. Hear about the work from the people behind it.</p>
+        </div>
+      </li>
+    </ul>
   </section>
+
+  <!-- DIVIDER -->
+  <div class="divider" style="margin: 0 80px;">
+    <svg height="12" viewBox="0 0 900 12" preserveAspectRatio="none">
+      <path d="M0 7 C100 4 200 9 300 7 C400 5 500 8 600 6 C700 4 800 8 900 7"
+            stroke="#8A8A8A" stroke-width="1" fill="none" opacity="0.5"/>
+    </svg>
+  </div>
 
   <!-- DETAILS -->
-  <section id="details">
-    <p class="section-label">Event details</p>
-    <h2>What to know before you come</h2>
-
-    <div class="details-grid">
-      <div class="detail-item">
-        <div class="label">Date</div>
-        <div class="value">Saturday, 24 October 2026</div>
-      </div>
-      <div class="detail-item">
-        <div class="label">Time</div>
-        <div class="value">10:00 to 11:30</div>
-        <div class="sub">90 minutes · local Cagliari time</div>
-      </div>
-      <div class="detail-item">
-        <div class="label">Venue</div>
-        <div class="value">Olive &amp; Coast tasting room</div>
-        <div class="sub">Cagliari, Sardinia</div>
-      </div>
-      <div class="detail-item">
-        <div class="label">Price</div>
-        <div class="value">EUR 25 per person</div>
-      </div>
-      <div class="detail-item">
-        <div class="label">Capacity</div>
-        <div class="value">20 guests maximum</div>
-      </div>
-      <div class="detail-item">
-        <div class="label">Language</div>
-        <div class="value">English</div>
-      </div>
-    </div>
+  <section class="section" id="details">
+    <span class="section-num">2</span>
+    <h2>The details.</h2>
+    <table class="details-table">
+      <tr><td>When</td><td>Saturday, 24 October 2026<br><span style="font-weight:400; font-size:15px; color:var(--graphite)">10:00 to 11:30 · 90 minutes</span></td></tr>
+      <tr><td>Where</td><td>Olive &amp; Coast tasting room<br><span style="font-weight:400; font-size:15px; color:var(--graphite)">Cagliari, Sardinia</span></td></tr>
+      <tr><td>Price</td><td>EUR 25 per person</td></tr>
+      <tr><td>Guests</td><td>Maximum 20</td></tr>
+      <tr><td>Language</td><td>English</td></tr>
+      <tr><td>Bookings</td><td><span class="unconfirmed">Not open yet — date to be confirmed by Elena Rossi</span></td></tr>
+    </table>
   </section>
+
+  <!-- DIVIDER -->
+  <div class="divider" style="margin: 0 80px;">
+    <svg height="12" viewBox="0 0 900 12" preserveAspectRatio="none">
+      <path d="M0 6 C150 3 300 9 450 6 C600 3 750 8 900 6"
+            stroke="#8A8A8A" stroke-width="1" fill="none" opacity="0.5"/>
+    </svg>
+  </div>
 
   <!-- WHO RUNS IT -->
-  <section id="who-runs-it" style="background: var(--white);">
-    <div class="two-col">
-      <div>
-        <p class="section-label">Who runs it</p>
-        <h2>Olive &amp; Coast, Cagliari</h2>
-        <p>
-          Olive &amp; Coast works with local food producers in Sardinia to bring their
-          products to visitors. This session is led in partnership with a local producer
-          who will be present throughout the tasting.
-        </p>
-        <p>
-          Producer: <span class="unconfirmed">[UNCONFIRMED: producer name not yet confirmed — Elena to advise]</span>
-        </p>
-        <p>
-          Dietary alternatives: <span class="unconfirmed">[UNCONFIRMED: whether alternatives will be offered — refer to Elena]</span>
-        </p>
-      </div>
-      <div class="img-placeholder about-img">
-        [IMAGE PLACEHOLDER: photo of the Olive &amp; Coast tasting room interior or exterior]
-      </div>
-    </div>
+  <section class="section" id="who-runs-it">
+    <span class="section-num">3</span>
+    <h2>Who runs it.</h2>
+    <p>
+      Olive &amp; Coast works with local food producers in Sardinia to bring
+      their products to visitors. This session is run in partnership with a
+      local producer who will be present for the full 90 minutes.
+    </p>
+    <p class="aside">
+      Producer: <span class="unconfirmed">[not yet confirmed — Elena to advise before launch]</span>
+    </p>
+    <p class="aside" style="margin-top: 12px;">
+      Dietary alternatives: <span class="unconfirmed">[not yet confirmed — refer questions to Elena Rossi]</span>
+    </p>
   </section>
 
-  <!-- FAQ -->
-  <section id="faq">
-    <p class="section-label">Questions</p>
-    <h2>Frequently asked</h2>
+  <!-- DIVIDER -->
+  <div class="divider" style="margin: 0 80px;">
+    <svg height="12" viewBox="0 0 900 12" preserveAspectRatio="none">
+      <path d="M0 5 C120 8 240 3 360 6 C480 9 600 4 720 6 C840 8 880 5 900 6"
+            stroke="#8A8A8A" stroke-width="1" fill="none" opacity="0.5"/>
+    </svg>
+  </div>
 
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <span class="section-num">4</span>
+    <h2>Questions.</h2>
     <div class="faq-list">
       <div class="faq-item">
         <h4>When do bookings open?</h4>
-        <p><span class="unconfirmed">[UNCONFIRMED: booking open date — Elena to confirm]</span>
-           To be told as soon as bookings are open, email us at
-           <a href="mailto:bookings@oliveandcoast.example">bookings@oliveandcoast.example</a>.</p>
+        <p><span class="unconfirmed">[Booking open date not yet confirmed — Elena to advise.]</span>
+           Email <a href="mailto:bookings@oliveandcoast.example">bookings@oliveandcoast.example</a> and we will notify you the moment they open.</p>
       </div>
       <div class="faq-item">
         <h4>How do I book?</h4>
-        <p>Bookings are not open yet. Once they are open, you can book by email to
+        <p>Bookings are not yet open. Once they are, you book by email to
            <a href="mailto:bookings@oliveandcoast.example">bookings@oliveandcoast.example</a>.</p>
       </div>
       <div class="faq-item">
-        <h4>What are the dietary options?</h4>
+        <h4>Are there dietary options?</h4>
         <p>The tasting includes bread (contains gluten) and cheese (contains milk).
-           <span class="unconfirmed">[UNCONFIRMED: whether alternative options will be available — Elena to confirm before launch]</span></p>
+           <span class="unconfirmed">[Whether alternatives will be available is not yet confirmed — refer all enquiries to Elena Rossi.]</span></p>
       </div>
       <div class="faq-item">
         <h4>What is the cancellation policy?</h4>
-        <p><span class="unconfirmed">[UNCONFIRMED: refund and cancellation terms — Elena to confirm before launch]</span></p>
+        <p><span class="unconfirmed">[Refund and cancellation terms not yet confirmed — Elena to advise before launch.]</span></p>
       </div>
       <div class="faq-item">
-        <h4>Is it in English?</h4>
-        <p>Yes. The session is conducted entirely in English.</p>
-      </div>
-      <div class="faq-item">
-        <h4>How many guests are there?</h4>
-        <p>Maximum 20 guests per session.</p>
+        <h4>Is the session in English?</h4>
+        <p>Yes. The full session is conducted in English.</p>
       </div>
     </div>
   </section>
 
-  <!-- BOOKING / GET NOTIFIED -->
-  <section id="notify" style="background: var(--cream);">
-    <div class="booking-box">
-      <p class="section-label" style="color: var(--gold);">Bookings opening soon</p>
-      <div class="price-tag">EUR 25</div>
-      <p class="price-note">per person · 90 minutes · maximum 20 guests</p>
-      <h2>Be the first to know</h2>
-      <p>Bookings are not yet open. Email us and we will notify you as soon as they are.</p>
-      <a class="btn-primary"
-         href="mailto:bookings@oliveandcoast.example?subject=A%20Taste%20of%20Sardinia%20%E2%80%94%20Notify%20me%20when%20bookings%20open">
-        Email us to be notified
-      </a>
-      <p class="booking-note">bookings@oliveandcoast.example</p>
-    </div>
+  <!-- DIVIDER -->
+  <div class="divider" style="margin: 0 80px;">
+    <svg height="12" viewBox="0 0 900 12" preserveAspectRatio="none">
+      <path d="M0 7 C200 4 400 9 600 6 C750 4 850 8 900 7"
+            stroke="#1A1A1A" stroke-width="1.2" fill="none" opacity="0.35"/>
+    </svg>
+  </div>
+
+  <!-- GET NOTIFIED -->
+  <section class="notify-section" id="notify">
+    <span class="section-num">5</span>
+    <h2>Be the first to know.</h2>
+    <p>Bookings are not yet open. Email us and we will write to you as soon as they are.</p>
+    <div class="price-display">EUR 25</div>
+    <p class="price-note">per person &nbsp;·&nbsp; 90 minutes &nbsp;·&nbsp; maximum 20 guests</p>
+    <a class="cta-ink"
+       href="mailto:bookings@oliveandcoast.example?subject=Notify%20me%20when%20bookings%20open%20%E2%80%94%20A%20Taste%20of%20Sardinia">
+      Email us to be notified
+    </a>
+    <p style="margin-top: 24px; font-family: 'Caveat', cursive; font-size: 15px; color: var(--graphite);">
+      bookings@oliveandcoast.example
+    </p>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <span class="footer-logo">Olive &amp; Coast</span>
-    <span>Cagliari, Sardinia · bookings@oliveandcoast.example</span>
-    <span>DRAFT — not for publication</span>
+    <div class="footer-cite">
+      Olive &amp; Coast · Cagliari, Sardinia<br>
+      bookings@oliveandcoast.example
+    </div>
+    <div class="footer-draft">
+      Draft — not for publication.<br>
+      Awaiting approval by Elena Rossi.
+    </div>
   </footer>
 
 </body>
